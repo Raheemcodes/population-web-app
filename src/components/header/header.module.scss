@@ -2,9 +2,9 @@
 
 .header {
   @include between-centered();
-  padding: toRem(30) toRem(16);
   background-color: var(--main-element-color);
   box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.06);
+  padding: toRem(30) toRem(16);
 
   @media screen and (min-width: $md) {
     padding: toRem(24) toRem(48);

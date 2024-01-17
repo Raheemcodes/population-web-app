@@ -75,6 +75,14 @@ body {
 
 main {
   width: 100%;
+  padding: 0 toRem(16);
+
+  @media screen and (min-width: $md) {
+    padding: 0 toRem(48);
+  }
+  @media screen and (min-width: $two-xl) {
+    padding: 0 toRem(81);
+  }
 }
 
 a {
