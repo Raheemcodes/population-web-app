@@ -1,0 +1,61 @@
+@import '../../shared/shared';
+
+.header {
+  @include between-centered();
+  padding: toRem(30) toRem(16);
+  background-color: var(--main-element-color);
+  box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.06);
+
+  @media screen and (min-width: $md) {
+    padding: toRem(24) toRem(48);
+  }
+  @media screen and (min-width: $two-xl) {
+    padding: toRem(24) toRem(81);
+  }
+}
+
+.question {
+  color: var(--font-color);
+  font-family: var(--font-name);
+  font-size: toRem(14);
+  font-weight: 800;
+  line-height: toRem(20); /* 142.857% */
+
+  @media screen and (min-width: $md) {
+    font-size: toRem(18);
+  }
+  @media screen and (min-width: $two-xl) {
+    font-size: toRem(24);
+  }
+}
+
+.btn {
+  @include centered();
+  color: var(--font-color);
+  font-family: var(--font-name);
+  font-size: toRem(12);
+  font-weight: 600;
+  gap: toRem(8);
+
+  @media screen and (min-width: $md) {
+    font-size: toRem(14);
+  }
+  @media screen and (min-width: $two-xl) {
+    font-size: toRem(16);
+  }
+
+  svg {
+    width: toRem(16);
+    height: toRem(16);
+
+    @media screen and (min-width: $md) {
+      width: toRem(18);
+      height: toRem(18);
+    }
+
+    @media screen and (min-width: $two-xl) {
+      width: toRem(20);
+      height: toRem(20);
+    }
+  }
+}
