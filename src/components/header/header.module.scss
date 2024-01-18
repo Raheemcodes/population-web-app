@@ -48,6 +48,10 @@
     width: toRem(16);
     height: toRem(16);
 
+    path {
+      stroke: var(--font-color);
+    }
+
     @media screen and (min-width: $md) {
       width: toRem(18);
       height: toRem(18);

@@ -1,0 +1,47 @@
+@import '../../shared/shared';
+
+.form-control {
+  @include display-flex();
+  background-color: var(--main-element-color);
+  border-radius: toRem(5);
+  gap: toRem(26);
+  padding: toRem(14) toRem(32);
+  max-width: toRem(480);
+
+  @media screen and (min-width: $md) {
+    padding: toRem(16) toRem(32);
+  }
+  @media screen and (min-width: $two-xl) {
+    padding: toRem(18) toRem(32);
+  }
+
+  input {
+    width: 100%;
+    border: none;
+    background-color: #0000;
+    font-family: var(--font-name);
+    font-size: toRem(14);
+    font-weight: 600;
+    color: var(--input);
+
+    &::placeholder {
+      font-size: toRem(12);
+      font-weight: 300;
+      color: var(--placeholder);
+    }
+  }
+}
+
+.icon {
+  width: toRem(16);
+  height: toRem(16);
+
+  @media screen and (min-width: $md) {
+    width: toRem(17);
+    height: toRem(17);
+  }
+  @media screen and (min-width: $two-xl) {
+    width: toRem(18);
+    height: toRem(18);
+  }
+}
