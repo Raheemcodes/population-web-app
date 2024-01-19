@@ -1,13 +1,20 @@
 @import '../../shared/shared';
 
 .main {
+  @include column-flex();
+  gap: toRem(32);
   padding-top: toRem(24);
+  padding-bottom: toRem(24);
 
   @media screen and (min-width: $md) {
+    gap: toRem(40);
     padding-top: toRem(36);
+    padding-bottom: toRem(36);
   }
   @media screen and (min-width: $two-xl) {
+    gap: toRem(48);
     padding-top: toRem(48);
+    padding-bottom: toRem(48);
   }
 }
 
@@ -21,4 +28,8 @@
   }
   @media screen and (min-width: $two-xl) {
   }
+}
+
+.country-list__container {
+  width: 100%;
 }

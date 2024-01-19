@@ -1,0 +1,52 @@
+@import '../../shared/shared';
+
+.li {
+  width: 100%;
+  border-radius: toRem(5);
+  background: var(--main-element-color);
+  box-shadow: 0px 0px 7px 2px rgba(0, 0, 0, 0.03);
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.img-container {
+  width: 100%;
+
+  img {
+    width: 100%;
+    height: auto;
+  }
+}
+
+.content {
+  @include column-flex();
+  gap: toRem(16);
+  padding: toRem(24) toRem(24) toRem(48);
+}
+
+.country-name {
+  font-family: var(--font-name);
+  font-size: toRem(18);
+  font-weight: 800;
+  line-height: toRem(26); /* 144.444% */
+  color: var(--font-color);
+}
+
+.desc-list {
+  @include column-flex();
+  gap: toRem(8);
+  list-style: none;
+  font-family: var(--font-name);
+  font-size: toRem(14);
+  font-weight: 400;
+  line-height: toRem(16); /* 114.286% */
+  color: var(--font-color);
+
+  span {
+    font-weight: 600;
+  }
+}
+
+.item {
+  @include display-flex();
+}

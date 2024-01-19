@@ -4,14 +4,17 @@ import classes from './Filter.module.scss';
 const Filter = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [openClass, setOpenClass] = useState<string>('');
+  let timeout: NodeJS.Timeout;
 
   const clickHandler = () => {
+    if (timeout) clearTimeout(timeout);
+
     if (!isOpen) {
       setIsOpen(() => true);
-      setTimeout(() => setOpenClass(() => classes['opened']), 300);
+      timeout = setTimeout(() => setOpenClass(() => classes['opened']), 300);
     } else {
       setOpenClass(() => '');
-      setTimeout(() => setIsOpen(() => false), 300);
+      timeout = setTimeout(() => setIsOpen(() => false), 300);
     }
   };
 
