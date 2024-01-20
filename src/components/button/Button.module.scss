@@ -1,0 +1,44 @@
+@import '../../shared/shared';
+
+.btn {
+  @include centered();
+  gap: toRem(8);
+  background: var(--main-element-color);
+  font-family: var(--font-name);
+  font-size: toRem(14);
+  font-weight: 300;
+  line-height: toRem(20); /* 142.857% */
+  color: var(--font-color);
+  padding: toRem(8) toRem(24);
+  border-radius: 2px;
+  box-shadow: 0px 0px 7px 0px rgba(0, 0, 0, 0.29);
+  align-self: flex-start;
+
+  @media screen and (min-width: $md) {
+    font-size: toRem(16);
+    padding: toRem(10) toRem(28);
+  }
+  @media screen and (min-width: $two-xl) {
+    padding: toRem(10) toRem(32);
+  }
+}
+
+.icon {
+  @include centered();
+  width: toRem(18);
+  height: toRem(18);
+
+  @media screen and (min-width: $md) {
+    width: toRem(20);
+    height: toRem(20);
+  }
+
+  svg {
+    width: 100%;
+    height: auto;
+
+    path {
+      fill: var(--font-color);
+    }
+  }
+}

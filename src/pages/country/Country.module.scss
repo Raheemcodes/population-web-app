@@ -1,0 +1,134 @@
+@import '../../shared/shared';
+
+.main {
+  @include column-flex();
+  width: 100%;
+  gap: toRem(64);
+  padding-top: toRem(40);
+  padding-bottom: toRem(40);
+
+  @media screen and (min-width: $md) {
+    gap: toRem(72);
+    padding-top: toRem(60);
+    padding-bottom: toRem(60);
+  }
+  @media screen and (min-width: $two-xl) {
+    gap: toRem(80);
+    padding-top: toRem(80) 0;
+    padding-bottom: toRem(80) 0;
+  }
+}
+
+.main-content {
+  @include column-flex();
+  gap: toRem(44);
+
+  @media screen and (min-width: $lg) {
+    gap: calc(120 / 1440) * 100%;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  @media screen and (min-width: $two-xl) {
+    align-items: center;
+  }
+}
+
+.img-cover {
+  @include display-flex();
+  width: 100%;
+  border-radius: toRem(5);
+  overflow: hidden;
+
+  @media screen and (min-width: $two-xl) {
+    width: calc(559 / 1440) * 100%;
+  }
+
+  img {
+    width: 100%;
+    height: auto;
+  }
+}
+
+.content {
+  @include column-flex();
+  gap: toRem(32);
+
+  @media screen and (min-width: $two-xl) {
+    width: calc(598 / 1440) * 100%;
+    // flex-shrink: 0;
+  }
+}
+
+.info {
+  @include column-flex();
+  gap: toRem(32);
+
+  @media screen and (min-width: $two-xl) {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+.first-info {
+  @include column-flex();
+  gap: toRem(16);
+}
+
+.title {
+  font-family: var(--font-name);
+  font-size: toRem(22);
+  font-weight: 800;
+  color: var(--font-color);
+
+  @media screen and (min-width: $md) {
+    font-size: toRem(26);
+  }
+  @media screen and (min-width: $two-xl) {
+    font-size: toRem(32);
+  }
+}
+
+.desc-list {
+  @include column-flex();
+  list-style: none;
+  gap: toRem(8);
+}
+
+.item {
+  font-family: var(--font-name);
+  font-size: toRem(14);
+  font-weight: 300;
+  line-height: toRem(32);
+  color: var(--font-color);
+
+  @media screen and (min-width: $md) {
+    font-size: toRem(15);
+  }
+  @media screen and (min-width: $two-xl) {
+    font-size: toRem(16);
+  }
+
+  .bold {
+    font-weight: 600;
+  }
+}
+
+.bottom-info {
+  @include column-flex();
+  gap: toRem(16);
+}
+
+.bottom-info__title {
+  font-family: var(--font-name);
+  font-size: toRem(16);
+  font-weight: 600;
+  line-height: toRem(24);
+  color: var(--font-color);
+}
+
+.button-list {
+  @include display-flex();
+  gap: toRem(10);
+  list-style: none;
+}

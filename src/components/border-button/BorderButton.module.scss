@@ -1,0 +1,20 @@
+@import '../../shared/shared';
+
+.button {
+  width: toRem(96);
+  font-family: var(--font-family);
+  font-size: toRem(12);
+  font-weight: 300;
+  color: var(--font-color);
+  background: var(--main-element-color);
+  padding: toRem(6) 0;
+  border-radius: toRem(2);
+  box-shadow: 0 0 toRem(4) toRem(1) rgba(0, 0, 0, 0.1);
+
+  @media screen and (min-width: $md) {
+    font-size: toRem(13);
+  }
+  @media screen and (min-width: $two-xl) {
+    font-size: toRem(14);
+  }
+}
