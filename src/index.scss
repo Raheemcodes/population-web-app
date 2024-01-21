@@ -67,6 +67,8 @@ body {
   --font-name: 'Nunito Sans', sans-serif;
   --placeholder: #c4c4c4;
   --input: #b3b3b3;
+  --glow-up: hsl(214, 9%, 71%);
+  --glow-down: hsl(214, 9%, 81%);
 
   @media (prefers-color-scheme: dark) {
     --bg-color: #202c36;
@@ -74,6 +76,8 @@ body {
     --font-color: #fff;
     --placeholder: #ffffff;
     --input: #fff;
+    --glow-up: hsl(214, 9%, 41%);
+    --glow-down: hsl(214, 9%, 51%);
   }
 
   .dark-theme {
@@ -131,9 +135,9 @@ button {
 
 @keyframes skeleton-loading {
   0% {
-    background-color: hsl(214, 9%, 71%);
+    background-color: var(--glow-up);
   }
   100% {
-    background-color: hsl(214, 9%, 91%);
+    background-color: var(--glow-down);
   }
 }

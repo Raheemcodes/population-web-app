@@ -1,8 +1,17 @@
+import { useEffect, useState } from 'react';
 import BorderButton from '../../components/border-button/BorderButton';
 import Button from '../../components/button/Button';
 import classes from './Country.module.scss';
+import { Country } from '../../shared/data.model';
 
 const CountryPage = () => {
+  const [country, setCountry] = useState<Country[]>([]);
+  // const
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <main className={classes['main']}>
       <Button />

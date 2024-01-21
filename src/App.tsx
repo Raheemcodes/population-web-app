@@ -3,6 +3,7 @@ import './App.scss';
 import RootLayout from './pages/Root';
 import HomePage from './pages/home/Home';
 import CountryPage from './pages/country/Country';
+import { CountriesContextProvider } from './store/countries.context';
 
 const router = createBrowserRouter([
   {
@@ -18,7 +19,11 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
-  return <RouterProvider router={router} />;
+  return (
+    <CountriesContextProvider>
+      <RouterProvider router={router} />
+    </CountriesContextProvider>
+  );
 }
 
 export default App;

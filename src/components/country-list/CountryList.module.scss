@@ -4,21 +4,33 @@
   list-style: none;
   display: grid;
   grid-template-columns: minmax(auto, toRem(264));
-  place-content: center;
   grid-gap: toRem(40);
+  place-content: center;
 
   @media screen and (min-width: $sm) {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, toRem(264));
+
+    @supports (aspect-ratio: 264/100) {
+      grid-template-columns: repeat(2, 1fr);
+    }
   }
   // @media screen and (min-width: $md) {
   //   grid-template-columns: repeat(3, 1fr);
   // }
   @media screen and (min-width: $lg) {
     grid-gap: toRem(58);
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(3, toRem(264));
+
+    @supports (aspect-ratio: 264/100) {
+      grid-template-columns: repeat(3, 1fr);
+    }
   }
   @media screen and (min-width: $two-xl) {
     grid-gap: toRem(67);
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(4, toRem(264));
+
+    @supports (aspect-ratio: 264/100) {
+      grid-template-columns: repeat(4, 1fr);
+    }
   }
 }
