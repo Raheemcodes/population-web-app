@@ -30,7 +30,9 @@ const CountryPage = () => {
 
   const fetchCountryHandler = async () => {
     setIsLoading(true);
-    const response = await fetch(`https://restcountries.com/v3.1/name/${name}`);
+    const response = await fetch(
+      `https://restcountries.com/v3.1/name/${name}?fullText=true`
+    );
     const data: Country[] = await response.json();
 
     setCountries(() => data);

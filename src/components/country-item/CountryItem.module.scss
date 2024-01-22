@@ -10,6 +10,7 @@
 }
 
 .img-container {
+  background-color: var(--glow-up);
   position: relative;
   aspect-ratio: 264/160;
   height: toRem(160);
@@ -64,4 +65,5 @@
 
 .item {
   @include display-flex();
+  align-self: flex-start;
 }

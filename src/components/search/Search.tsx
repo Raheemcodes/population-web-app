@@ -1,6 +1,24 @@
+import { useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import classes from './Search.module.scss';
 
+let timeout: NodeJS.Timeout;
+
 const SearchInput = () => {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const initInputValue: string = searchParams.get('search') || '';
+  const [searchInput, setSearchInput] = useState(initInputValue);
+
+  const changeHandler = ({ currentTarget: { value } }: any) => {
+    if (timeout) clearTimeout(timeout);
+
+    timeout = setTimeout(() => {
+      setSearchParams({ search: value });
+    }, 500);
+
+    setSearchInput(value);
+  };
+
   return (
     <div className={classes['form-control']}>
       <div className={classes.icon}>
@@ -20,7 +38,12 @@ const SearchInput = () => {
         </svg>
       </div>
 
-      <input type='text' placeholder='Search for a country…' />
+      <input
+        type='text'
+        placeholder='Search for a country…'
+        onChange={changeHandler}
+        value={searchInput}
+      />
     </div>
   );
 };

@@ -1,9 +1,11 @@
 import { useState } from 'react';
 import classes from './Filter.module.scss';
+import { useSearchParams } from 'react-router-dom';
 
 const Filter = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [openClass, setOpenClass] = useState<string>('');
+  const [searchParams, setSearchParams] = useSearchParams();
   let timeout: NodeJS.Timeout;
 
   const clickHandler = () => {
@@ -16,6 +18,10 @@ const Filter = () => {
       setOpenClass(() => '');
       timeout = setTimeout(() => setIsOpen(() => false), 300);
     }
+  };
+
+  const setRegion = (region: string) => {
+    setSearchParams({ region });
   };
 
   return (
@@ -46,11 +52,36 @@ const Filter = () => {
 
       {isOpen && (
         <ul className={classes['dropdown-list']}>
-          <li className={classes['dropdown-item']}>Africa</li>
-          <li className={classes['dropdown-item']}>America</li>
-          <li className={classes['dropdown-item']}>Asia</li>
-          <li className={classes['dropdown-item']}>Europe</li>
-          <li className={classes['dropdown-item']}>Oceania</li>
+          <li
+            className={classes['dropdown-item']}
+            onClick={() => setRegion('Africa')}
+          >
+            Africa
+          </li>
+          <li
+            className={classes['dropdown-item']}
+            onClick={() => setRegion('America')}
+          >
+            America
+          </li>
+          <li
+            className={classes['dropdown-item']}
+            onClick={() => setRegion('Asia')}
+          >
+            Asia
+          </li>
+          <li
+            className={classes['dropdown-item']}
+            onClick={() => setRegion('Europe')}
+          >
+            Europe
+          </li>
+          <li
+            className={classes['dropdown-item']}
+            onClick={() => setRegion('Oceania')}
+          >
+            Oceania
+          </li>
         </ul>
       )}
     </div>

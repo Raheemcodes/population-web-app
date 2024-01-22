@@ -43,16 +43,24 @@
   background-color: var(--glow-up);
   height: calc(229 / 375) * 100vw;
 
-  @media screen and (min-width: $lg) {
-    height: calc(401 / 1440) * 100vw;
+  @supports (aspect-ratio: 320/299) {
+    height: auto;
   }
 
-  // @supports (aspect-ratio: 320/299) {
-  //   height: auto;
-  // }
+  @media screen and (min-width: $lg) {
+    height: calc(401 / 1440) * 100vw;
+
+    @supports (aspect-ratio: 320/299) {
+      height: auto;
+    }
+  }
 
   @media screen and (min-width: $two-xl) {
     width: calc(559 / 1440) * 100%;
+
+    @supports (aspect-ratio: 320/299) {
+      height: auto;
+    }
   }
 
   img {
@@ -63,6 +71,8 @@
     right: 0;
     width: 100%;
     height: 100%;
+    object-fit: cover;
+    object-position: center;
   }
 }
 
