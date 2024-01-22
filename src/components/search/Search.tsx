@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import classes from './Search.module.scss';
 
@@ -6,18 +6,22 @@ let timeout: NodeJS.Timeout;
 
 const SearchInput = () => {
   const [searchParams, setSearchParams] = useSearchParams();
-  const initInputValue: string = searchParams.get('search') || '';
+  const initInputValue: string = searchParams.get('name') || '';
   const [searchInput, setSearchInput] = useState(initInputValue);
 
   const changeHandler = ({ currentTarget: { value } }: any) => {
     if (timeout) clearTimeout(timeout);
 
     timeout = setTimeout(() => {
-      setSearchParams({ search: value });
+      setSearchParams({ name: value });
     }, 500);
 
     setSearchInput(value);
   };
+
+  useEffect(() => {
+    if (!searchParams.get('name')) setSearchInput('');
+  }, [searchParams]);
 
   return (
     <div className={classes['form-control']}>

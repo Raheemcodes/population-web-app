@@ -40,7 +40,7 @@
   aspect-ratio: 320/229;
   border-radius: toRem(5);
   overflow: hidden;
-  background-color: var(--glow-up);
+  // background-color: var(--glow-up);
   height: calc(229 / 375) * 100vw;
 
   @supports (aspect-ratio: 320/299) {
