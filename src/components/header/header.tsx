@@ -1,11 +1,37 @@
+import { useState } from 'react';
 import classess from './header.module.scss';
+import { Link } from 'react-router-dom';
 
 const Header = () => {
+  const { body } = document;
+  const [theme, setTheme] = useState<string | null>(
+    localStorage.getItem('theme')
+  );
+  if (theme) body.classList.add('dark-theme');
+
+  const themeHandler = () => {
+    if (body.classList.contains('dark-theme')) {
+      body.classList.remove('dark-theme');
+      localStorage.removeItem('theme');
+      setTheme(null);
+    } else {
+      body.classList.add('dark-theme');
+      localStorage.setItem('theme', 'dark');
+      setTheme('dark');
+    }
+  };
+
   return (
     <header className={classess.header}>
-      <div className={classess.question}>Where in the world?</div>
+      <Link to='.'>
+        <div className={classess.question}>Where in the world?</div>
+      </Link>
 
-      <button className={classess.btn} title='Theme Button'>
+      <button
+        className={classess.btn}
+        title='Theme Button'
+        onClick={themeHandler}
+      >
         <svg
           xmlns='http://www.w3.org/2000/svg'
           width='16'
@@ -22,7 +48,7 @@ const Header = () => {
           />
         </svg>
 
-        <span>Dark Mode</span>
+        <span>{theme ? 'Light Mode' : 'Dark Mode'}</span>
       </button>
     </header>
   );

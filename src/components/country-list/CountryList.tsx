@@ -18,6 +18,7 @@ const CountryList = () => {
           />
         ))}
       {!countriesCxt.isLoading &&
+        !!countriesCxt.countries.length &&
         countriesCxt.countries.map((country: Country) => (
           <CountryItem
             key={country.name.official}
@@ -25,6 +26,9 @@ const CountryList = () => {
             isLoading={countriesCxt.isLoading}
           />
         ))}
+      {!countriesCxt.isLoading && !countriesCxt.countries.length && (
+        <p>No Country was Found!</p>
+      )}
     </ul>
   );
 };

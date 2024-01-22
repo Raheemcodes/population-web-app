@@ -20,20 +20,27 @@ export const CountriesContextProvider = (props: PropsWithChildren) => {
   const [searchParams] = useSearchParams();
 
   const fetchCountriesHandler = async () => {
-    const [key, val] = searchParams.entries().next().value;
-    console.log();
+    const [key, val] = searchParams.entries().next().value || [];
+    try {
+      setIsLoading(true);
 
-    setIsLoading(true);
+      const response = await fetch(
+        `https://restcountries.com/v3.1/${!val ? 'all' : `${key}/${val}`}`
+      );
 
-    const response = await fetch(
-      `https://restcountries.com/v3.1/${!val ? 'all' : `${key}/${val}`}`
-    );
-    const data: Country[] = await response.json();
+      if (!response.ok) throw new Error('Something went wrong');
 
-    setCountries(() => data);
-    setTimeout(() => {
+      const data: Country[] = await response.json();
+
+      setCountries(() => data);
+      setTimeout(() => {
+        setIsLoading(false);
+      }, 2000);
+    } catch (err) {
+      setCountries(() => []);
+
       setIsLoading(false);
-    }, 2000);
+    }
   };
 
   useEffect(() => {

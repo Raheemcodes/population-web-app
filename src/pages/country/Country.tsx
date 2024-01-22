@@ -29,18 +29,29 @@ const CountryPage = () => {
   };
 
   const fetchCountryHandler = async () => {
-    setIsLoading(true);
-    const response = await fetch(
-      `https://restcountries.com/v3.1/name/${name}?fullText=true`
-    );
-    const data: Country[] = await response.json();
+    try {
+      setIsLoading(true);
 
-    setCountries(() => data);
-    console.log(data[0]);
+      const response = await fetch(
+        `https://restcountries.com/v3.1/name/${name}?fullText=true`
+      );
 
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 2000);
+      if (!response.ok) throw new Error('Something went wrong!');
+
+      const data: Country[] = await response.json();
+
+      setCountries(() => data);
+
+      setTimeout(() => {
+        setIsLoading(false);
+      }, 2000);
+    } catch {
+      setCountries(() => []);
+
+      setTimeout(() => {
+        setIsLoading(false);
+      }, 2000);
+    }
   };
 
   useEffect(() => {
@@ -56,12 +67,13 @@ const CountryPage = () => {
       <Button />
 
       <div className={classes['main-content']}>
+        {!isLoading && !country && <p>No Country was Found!</p>}
         {isLoading && (
           <div className={`${classes['img-cover']} skeleton index`}>
             <img loading='lazy' alt='' />
           </div>
         )}
-        {!isLoading && (
+        {!isLoading && country && (
           <div className={classes['img-cover']}>
             <img
               width='320px'
@@ -79,7 +91,7 @@ const CountryPage = () => {
               {isLoading && (
                 <h2 className={`${classes['title']} skeleton`}>Belgium</h2>
               )}
-              {!isLoading && (
+              {!isLoading && country && (
                 <h2 className={classes['title']}>{country.name.common}</h2>
               )}
 
@@ -90,7 +102,7 @@ const CountryPage = () => {
                     <span> Bundesrepublik Deutschland</span>
                   </li>
                 )}
-                {!isLoading && (
+                {!isLoading && country && (
                   <li className={classes['item']}>
                     <span className={classes['bold']}>Native Name:</span>
                     <span>
@@ -105,7 +117,7 @@ const CountryPage = () => {
                     <span> 11,319,511</span>
                   </li>
                 )}
-                {!isLoading && (
+                {!isLoading && country && (
                   <li className={classes['item']}>
                     <span className={classes['bold']}>Population:</span>
                     <span> {country.population}</span>
@@ -118,7 +130,7 @@ const CountryPage = () => {
                     <span> Europe</span>
                   </li>
                 )}
-                {!isLoading && (
+                {!isLoading && country && (
                   <li className={classes['item']}>
                     <span className={classes['bold']}>Sub Region:</span>
                     <span> {country.continents[0]}</span>
@@ -131,7 +143,7 @@ const CountryPage = () => {
                     <span> Brussels</span>
                   </li>
                 )}
-                {!isLoading && (
+                {!isLoading && country && (
                   <li className={classes['item']}>
                     <span className={classes['bold']}>Capital:</span>
                     <span> {country.capital}</span>
@@ -146,7 +158,7 @@ const CountryPage = () => {
                   <span className={classes['bold']}>Top Level Domain:</span> .be
                 </li>
               )}
-              {!isLoading && (
+              {!isLoading && country && (
                 <li className={classes['item']}>
                   <span className={classes['bold']}>Top Level Domain:</span>{' '}
                   {country.tld}
@@ -158,7 +170,7 @@ const CountryPage = () => {
                   <span className={classes['bold']}>Currencies:</span> Euro
                 </li>
               )}
-              {!isLoading && (
+              {!isLoading && country && (
                 <li className={classes['item']}>
                   <span className={classes['bold']}>Currencies:</span>{' '}
                   {getCurrency(country.currencies).name}
@@ -171,7 +183,7 @@ const CountryPage = () => {
                   French, German
                 </li>
               )}
-              {!isLoading && (
+              {!isLoading && country && (
                 <li className={classes['item']}>
                   <span className={classes['bold']}>Languages:</span>
                   {' ' + manipulatedLanguages()}
@@ -186,7 +198,7 @@ const CountryPage = () => {
                 Border Countries:
               </h3>
             )}
-            {!isLoading && (
+            {!isLoading && country && (
               <h3 className={classes['bottom-info__title']}>
                 Border Countries:
               </h3>
@@ -203,13 +215,14 @@ const CountryPage = () => {
                   </li>
                 ))}
               {!isLoading &&
+                country &&
                 country.borders &&
                 country.borders.map((countryName) => (
                   <li className={classes['button-item']} key={countryName}>
                     <BorderButton>{countryName}</BorderButton>
                   </li>
                 ))}
-              {!isLoading && !country.borders && <span>None</span>}
+              {!isLoading && country && !country.borders && <span>None</span>}
             </ul>
           </div>
         </div>

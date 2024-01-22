@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { ChangeEventHandler, useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import classes from './Search.module.scss';
 
@@ -9,7 +9,9 @@ const SearchInput = () => {
   const initInputValue: string = searchParams.get('name') || '';
   const [searchInput, setSearchInput] = useState(initInputValue);
 
-  const changeHandler = ({ currentTarget: { value } }: any) => {
+  const changeHandler: ChangeEventHandler<HTMLInputElement> = ({
+    currentTarget: { value },
+  }) => {
     if (timeout) clearTimeout(timeout);
 
     timeout = setTimeout(() => {

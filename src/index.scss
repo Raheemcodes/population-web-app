@@ -80,8 +80,24 @@ body {
     --glow-down: hsl(214, 9%, 51%);
   }
 
-  .dark-theme {
+  &.dark-theme {
+    --bg-color: #202c36;
+    --main-element-color: #2b3844;
+    --font-color: #fff;
+    --placeholder: #ffffff;
+    --input: #fff;
+    --glow-up: hsl(214, 9%, 41%);
+    --glow-down: hsl(214, 9%, 51%);
+
     @media (prefers-color-scheme: dark) {
+      --bg-color: #fafafa;
+      --main-element-color: #ffffff;
+      --font-color: #111517;
+      --font-name: 'Nunito Sans', sans-serif;
+      --placeholder: #c4c4c4;
+      --input: #b3b3b3;
+      --glow-up: hsl(214, 9%, 71%);
+      --glow-down: hsl(214, 9%, 81%);
     }
   }
 }
@@ -107,6 +123,12 @@ button {
   background-color: #0000;
   cursor: pointer;
   border: none;
+}
+
+p {
+  margin: 2rem auto;
+  font-size: toRem(16);
+  font-weight: 800;
 }
 
 .skeleton {
