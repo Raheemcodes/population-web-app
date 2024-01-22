@@ -19,7 +19,7 @@ export const CountriesContextProvider = (props: PropsWithChildren) => {
     setIsLoading(true);
     const response = await fetch('https://restcountries.com/v3.1/all');
     const data: Country[] = await response.json();
-    console.log(data[0]);
+
     setCountries(() => data);
     setTimeout(() => {
       setIsLoading(false);

@@ -3,13 +3,38 @@ import BorderButton from '../../components/border-button/BorderButton';
 import Button from '../../components/button/Button';
 import classes from './Country.module.scss';
 import { Country } from '../../shared/data.model';
+import { useParams } from 'react-router-dom';
 
 const CountryPage = () => {
-  const [country, setCountry] = useState<Country[]>([]);
-  // const
+  const { name } = useParams();
+  const [[country], setCountries] = useState<Country[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+
+  const getNativeName = (object: any) => {
+    const [key] = Object.keys(object);
+
+    return object[key];
+  };
+
+  const fetchCountryHandler = async () => {
+    setIsLoading(true);
+    const response = await fetch(`https://restcountries.com/v3.1/name/${name}`);
+    const data: Country[] = await response.json();
+
+    setCountries(() => data);
+    console.log(data[0]);
+
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 2000);
+  };
 
   useEffect(() => {
     window.scrollTo(0, 0);
+  }, []);
+
+  useEffect(() => {
+    fetchCountryHandler();
   }, []);
 
   return (
@@ -17,34 +42,78 @@ const CountryPage = () => {
       <Button />
 
       <div className={classes['main-content']}>
-        <div className={classes['img-cover']}>
-          <img
-            width='320px'
-            height='229px'
-            loading='lazy'
-            src='https://flagcdn.com/de.svg'
-            alt=''
-          />
-        </div>
+        {isLoading && (
+          <div className={`${classes['img-cover']} skeleton index`}>
+            <img width='320px' height='229px' loading='lazy' alt='' />
+          </div>
+        )}
+        {!isLoading && (
+          <div className={classes['img-cover']}>
+            <img
+              width='320px'
+              height='229px'
+              loading='lazy'
+              src={country.flags.svg}
+              alt=''
+            />
+          </div>
+        )}
 
         <div className={classes['content']}>
           <div className={classes['info']}>
             <div className={classes['first-info']}>
-              <h2 className={classes['title']}>Belgium</h2>
+              {isLoading && (
+                <h2 className={`${classes['title']} skeleton`}>Belgium</h2>
+              )}
+              {!isLoading && (
+                <h2 className={classes['title']}>{country.name.common}</h2>
+              )}
 
               <ul className={classes['desc-list']}>
-                <li className={classes['item']}>
-                  <span className={classes['bold']}>Native Name:</span>
-                  <span> Belgie</span>
-                </li>
-                <li className={classes['item']}>
-                  <span className={classes['bold']}>Population:</span>
-                  <span> 11,319,511</span>
-                </li>
-                <li className={classes['item']}>
-                  <span className={classes['bold']}>Sub Region:</span>
-                  <span> Europe</span>
-                </li>
+                {isLoading && (
+                  <li className={`${classes['item']} skeleton`}>
+                    <span className={classes['bold']}>Native Name:</span>
+                    <span> Bundesrepublik Deutschland</span>
+                  </li>
+                )}
+
+                {!isLoading && (
+                  <li className={classes['item']}>
+                    <span className={classes['bold']}>Native Name:</span>
+                    <span>
+                      {' ' + getNativeName(country.name.nativeName).official}
+                    </span>
+                  </li>
+                )}
+
+                {isLoading && (
+                  <li className={`${classes['item']} skeleton`}>
+                    <span className={classes['bold']}>Population:</span>
+                    <span> 11,319,511</span>
+                  </li>
+                )}
+
+                {!isLoading && (
+                  <li className={classes['item']}>
+                    <span className={classes['bold']}>Population:</span>
+                    <span> {country.population}</span>
+                  </li>
+                )}
+
+                {isLoading && (
+                  <li className={`${classes['item']} skeleton`}>
+                    <span className={classes['bold']}>Sub Region:</span>
+                    <span> Europe</span>
+                  </li>
+                )}
+
+                {!isLoading && (
+                  <li className={classes['item']}>
+                    <span className={classes['bold']}>Sub Region:</span>
+                    <span> {country.continents[0]}</span>
+                  </li>
+                )}
+
                 <li className={classes['item']}>
                   <span className={classes['bold']}>Capital:</span>
                   <span> Brussels</span>

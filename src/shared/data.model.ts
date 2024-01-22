@@ -3,10 +3,7 @@ export interface Country {
     common: string;
     official: string;
     nativeName: {
-      deu: {
-        official: string;
-        common: string;
-      };
+      official: string;
     };
   };
   tld: string[];
