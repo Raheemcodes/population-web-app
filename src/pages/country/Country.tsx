@@ -16,6 +16,18 @@ const CountryPage = () => {
     return object[key];
   };
 
+  const getCurrency = (object: any) => {
+    const [key] = Object.keys(object);
+
+    return object[key];
+  };
+
+  const manipulatedLanguages = (): string => {
+    const languages = Object.values(country.languages);
+
+    return languages.join(', ');
+  };
+
   const fetchCountryHandler = async () => {
     setIsLoading(true);
     const response = await fetch(`https://restcountries.com/v3.1/name/${name}`);
@@ -44,7 +56,7 @@ const CountryPage = () => {
       <div className={classes['main-content']}>
         {isLoading && (
           <div className={`${classes['img-cover']} skeleton index`}>
-            <img width='320px' height='229px' loading='lazy' alt='' />
+            <img loading='lazy' alt='' />
           </div>
         )}
         {!isLoading && (
@@ -76,7 +88,6 @@ const CountryPage = () => {
                     <span> Bundesrepublik Deutschland</span>
                   </li>
                 )}
-
                 {!isLoading && (
                   <li className={classes['item']}>
                     <span className={classes['bold']}>Native Name:</span>
@@ -92,7 +103,6 @@ const CountryPage = () => {
                     <span> 11,319,511</span>
                   </li>
                 )}
-
                 {!isLoading && (
                   <li className={classes['item']}>
                     <span className={classes['bold']}>Population:</span>
@@ -106,7 +116,6 @@ const CountryPage = () => {
                     <span> Europe</span>
                   </li>
                 )}
-
                 {!isLoading && (
                   <li className={classes['item']}>
                     <span className={classes['bold']}>Sub Region:</span>
@@ -114,40 +123,91 @@ const CountryPage = () => {
                   </li>
                 )}
 
-                <li className={classes['item']}>
-                  <span className={classes['bold']}>Capital:</span>
-                  <span> Brussels</span>
-                </li>
+                {isLoading && (
+                  <li className={`${classes['item']} skeleton`}>
+                    <span className={classes['bold']}>Capital:</span>
+                    <span> Brussels</span>
+                  </li>
+                )}
+                {!isLoading && (
+                  <li className={classes['item']}>
+                    <span className={classes['bold']}>Capital:</span>
+                    <span> {country.capital}</span>
+                  </li>
+                )}
               </ul>
             </div>
 
             <ul className={classes['desc-list']}>
-              <li className={classes['item']}>
-                <span className={classes['bold']}>Top Level Domain:</span> be
-              </li>
-              <li className={classes['item']}>
-                <span className={classes['bold']}>Currencies:</span> Euro
-              </li>
-              <li className={classes['item']}>
-                <span className={classes['bold']}>Languages:</span> Dutch,
-                French, German
-              </li>
+              {isLoading && (
+                <li className={`${classes['item']} skeleton`}>
+                  <span className={classes['bold']}>Top Level Domain:</span> .be
+                </li>
+              )}
+              {!isLoading && (
+                <li className={classes['item']}>
+                  <span className={classes['bold']}>Top Level Domain:</span>{' '}
+                  {country.tld}
+                </li>
+              )}
+
+              {isLoading && (
+                <li className={`${classes['item']} skeleton`}>
+                  <span className={classes['bold']}>Currencies:</span> Euro
+                </li>
+              )}
+              {!isLoading && (
+                <li className={classes['item']}>
+                  <span className={classes['bold']}>Currencies:</span>{' '}
+                  {getCurrency(country.currencies).name}
+                </li>
+              )}
+
+              {isLoading && (
+                <li className={`${classes['item']} skeleton`}>
+                  <span className={classes['bold']}>Languages:</span> Dutch,
+                  French, German
+                </li>
+              )}
+              {!isLoading && (
+                <li className={classes['item']}>
+                  <span className={classes['bold']}>Languages:</span>
+                  {' ' + manipulatedLanguages()}
+                </li>
+              )}
             </ul>
           </div>
 
           <div className={classes['bottom-info']}>
-            <h3 className={classes['bottom-info__title']}>Border Countries:</h3>
+            {isLoading && (
+              <h3 className={`${classes['bottom-info__title']} skeleton`}>
+                Border Countries:
+              </h3>
+            )}
+            {!isLoading && (
+              <h3 className={classes['bottom-info__title']}>
+                Border Countries:
+              </h3>
+            )}
 
             <ul className={classes['button-list']}>
-              <li className={classes['button-item']}>
-                <BorderButton>France</BorderButton>
-              </li>
-              <li className={classes['button-item']}>
-                <BorderButton>Germany</BorderButton>
-              </li>
-              <li className={classes['button-item']}>
-                <BorderButton>Netherlands</BorderButton>
-              </li>
+              {isLoading &&
+                ['France', 'Germany', 'Nigeria'].map((countryName) => (
+                  <li
+                    className={`${classes['button-item']} skeleton`}
+                    key={countryName}
+                  >
+                    <BorderButton>France</BorderButton>
+                  </li>
+                ))}
+              {!isLoading &&
+                country.borders &&
+                country.borders.map((countryName) => (
+                  <li className={classes['button-item']} key={countryName}>
+                    <BorderButton>{countryName}</BorderButton>
+                  </li>
+                ))}
+              {!isLoading && !country.borders && <span>None</span>}
             </ul>
           </div>
         </div>

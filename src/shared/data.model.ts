@@ -14,12 +14,7 @@ export interface Country {
   independent: boolean;
   status: string;
   unMember: boolean;
-  currencies: {
-    EUR: {
-      name: string;
-      symbol: string;
-    };
-  };
+  currencies: {};
   idd: {
     root: string;
     suffixes: string[];
@@ -28,9 +23,7 @@ export interface Country {
   altSpellings: [string, string, string];
   region: string;
   subregion: string;
-  languages: {
-    deu: string;
-  };
+  languages: {};
   translations: {
     ara: {
       official: string;

@@ -1,9 +1,8 @@
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import './App.scss';
 import RootLayout from './pages/Root';
-import HomePage from './pages/home/Home';
 import CountryPage from './pages/country/Country';
-import { CountriesContextProvider } from './store/countries.context';
+import HomePage from './pages/home/Home';
 
 const router = createBrowserRouter([
   {
@@ -19,11 +18,7 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
-  return (
-    <CountriesContextProvider>
-      <RouterProvider router={router} />
-    </CountriesContextProvider>
-  );
+  return <RouterProvider router={router} />;
 }
 
 export default App;
