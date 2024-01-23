@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import BorderButton from '../../components/border-button/BorderButton';
 import Button from '../../components/button/Button';
-import classes from './Country.module.scss';
 import { Country } from '../../shared/data.model';
-import { useParams } from 'react-router-dom';
+import classes from './Country.module.scss';
 
 const CountryPage = () => {
   const { name } = useParams();

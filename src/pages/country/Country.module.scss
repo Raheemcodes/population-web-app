@@ -100,9 +100,13 @@
 }
 
 .first-info {
-  width: 50%;
+  width: 100%;
   @include column-flex();
   gap: toRem(16);
+
+  @media screen and (min-width: $md) {
+    width: 50%;
+  }
 }
 
 .title {
@@ -163,4 +167,5 @@
   @include display-flex();
   gap: toRem(10);
   list-style: none;
+  flex-wrap: wrap;
 }

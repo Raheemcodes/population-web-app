@@ -35,7 +35,7 @@ export const CountriesContextProvider = (props: PropsWithChildren) => {
       setCountries(() => data);
       setTimeout(() => {
         setIsLoading(false);
-      }, 2000);
+      }, 20000);
     } catch (err) {
       setCountries(() => []);
 
